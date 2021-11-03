@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <style xmlns="http://www.w3.org/1999/html">
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+
+    <div class="content">
+        <div class="example-wrapper">
+            <h1>Products:</h1>
+            <button type="button" class="btn btn-warning" onclick="window.location.href='/add/product'">Add products</button>
+            {% for product in products %}
+                <div class="products_item card" style="width: 35rem;">
+                    <img class="card-img-top" src="{% if product.img %}img/{{ product.img }}{% else %}img/empty.jpg{% endif %}" style="width: 100px;height: 100px;" alt="photo">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.title }}</h5>
+                        <p class="card-text">{{ product.price }}</p>
+                        </br>
+                        <p class="card-text">{{ product.description }}</p>
+                        <a class="btn btn-primary" href="/update/product/{{ product.id }}">Edit Product</a>
+                        <a class="btn btn-primary" href="/delete/{{ product.id }}">Delete Product</a>
+                    </div>
+                </div>
+            {% endfor%}
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+    <ul class="list-group sidebar">
+        <li class="list-group-item"><a href="/category/transport">Transport</a></li>
+        <li class="list-group-item"><a href="/category/phone">Phone</a></li>
+        <li class="list-group-item"><a href="/category/chancellery">Chancellery</a></li>
+        <li class="list-group-item"><a href="/category/pats">Pats</a></li>
+        <li class="list-group-item"><a href="/category/computer_peripherals">Computer Peripherals</a></li>
+    </ul>
+{% endblock %}

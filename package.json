@@ -1,0 +1,5 @@
+{
+  "dependencies": {
+    "@myspace-nu/jquery.fancytable": "^1.0.9"
+  }
+}

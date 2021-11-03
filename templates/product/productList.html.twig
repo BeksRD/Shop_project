@@ -1,0 +1,31 @@
+<div id="products" class="example-wrapper">
+    <h1>Products:</h1>
+    <button type="button" class="btn btn-warning" onclick="window.location.href='/add/product'">Add products</button>
+    <div class="products" data-id="{{ thisPage }}">
+        {% for product in result %}
+            <div class="products_item card" style="width: 35rem;">
+                <img class="card-img-top" src="{% if product.img %}img/{{ product.img }}{% else %}img/empty.jpg{% endif %}" style="width: 100px;height: 100px;" alt="photo">
+                <div class="card-body">
+                    <h5 class="card-title">{{ product.title }}</h5>
+                    <p class="card-text">{{ product.price }}</p>
+                    </br>
+                    <p class="card-text">{{ product.description }}</p>
+                    <a class="btn btn-primary" href="/update/product/{{ product.id }}">Edit Product</a>
+                    <a class="btn btn-primary" href="/delete/{{ product.id }}">Delete Product</a>
+                </div>
+            </div>
+        {% endfor%}
+    </div>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+    {% if maxPages > 1 %}
+        <div class="btn-group mr-2 pagination pagination-sm"role="group" aria-label="First group">
+{#             Render each page number#}
+            {% for i in 1..maxPages %}
+                <button type="button" class="btn btn-secondary" {{ thisPage == i ? 'class="active"' }}>
+                    <a class="paginate" href="{{ path('app_product_show', {page: i}) }}" data-id="{{ i }}">{{ i }}</a>
+                </button>
+            {% endfor %}
+        </div>
+    {% endif %}
+    </div>
+</div>

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{%block body %}
+    <h1>Add Product</h1>
+    {{ form_start(product_form) }}
+        {{ form_widget(product_form) }}
+    <select name="category_id" id="category">
+    {% for category in categories %}
+            <option>{{ category.name }}</option>
+    {% endfor %}
+    </select>
+        <button type="submit">Add</button>
+    {{ form_end(product_form) }}
+
+{% endblock %}

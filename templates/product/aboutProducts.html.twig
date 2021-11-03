@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Product{% endblock %}
+
+{% block body %}
+    <style xmlns="http://www.w3.org/1999/html">
+        .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+        .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+    </style>
+    <div class="card" style="width: 22rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ activity.type }}</h5>
+            <p class="card-text">{{ activity.activity}}</p>
+            {% if activity.link %}
+                <a href="{{ activity.link }}" class="btn btn-primary">Check it out</a>
+            {% endif %}
+        </div>
+    </div>
+    <div class="content">
+        <div id="products" class="example-wrapper">
+                <h1>Products:</h1>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <button type="button" class="btn btn-warning" onclick="window.location.href='/add/product'">Add products</button>
+                {% endif %}
+            <div class="products" data-id="{{ thisPage }}">
+                    {% for product in products %}
+                        <div class="products_item card" style="width: 35rem;">
+                            <img class="card-img-top" src="{% if product.img %}img/{{ product.img }}{% else %}img/empty.jpg{% endif %}" style="width: 100px;height: 100px;" alt="photo">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ product.title }}</h5>
+                                <p class="card-text">{{ product.price }}</p>
+                                </br>
+                                <p class="card-text">{{ product.description }}</p>
+                                <a class="btn btn-primary" href="/update/product/{{ product.id }}">Edit Product</a>
+                                <a class="btn btn-primary" href="/delete/{{ product.id }}">Delete Product</a>
+                            </div>
+                        </div>
+                    {% endfor%}
+            </div>
+
+            <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            {% if maxPages > 1 %}
+                <div class="btn-group mr-2 pagination pagination-sm" role="group" aria-label="First group" >
+                    {# `«` arrow  #}
+                    <button type="button" class="btn btn-secondary" {{ thisPage == 1 ? 'class="disabled"' }}>
+                        <a href="{{ path('app_product_show', {page: thisPage-1 < 1 ? 1 : thisPage-1}) }}">«</a>
+                    </button>
+
+                    {# Render each page number #}
+                    {% for i in 1..maxPages %}
+                        <button type="button" class="btn btn-secondary" {{ thisPage == i ? 'class="active"' }}>
+                            <a href="{{ path('app_product_show', {page: i}) }}">{{ i }}</a>
+                        </button>
+                    {% endfor %}
+
+                    {# `»` arrow #}
+                    <button type="button" class="btn btn-secondary" {{ thisPage == maxPages ? 'class="disabled"' }}>
+                        <a href="{{ path('app_product_show', {page: thisPage+1 <= maxPages ? thisPage+1 : thisPage}) }}">»</a>
+                    </button>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block sidebar %}
+    <ul class="list-group sidebar" style="top: 180px">
+        <li class="list-group-item"><a href="/category/transport">Transport</a></li>
+        <li class="list-group-item"><a href="/category/phone">Phone</a></li>
+        <li class="list-group-item"><a href="/category/chancellery">Chancellery</a></li>
+        <li class="list-group-item"><a href="/category/pats">Pats</a></li>
+        <li class="list-group-item"><a href="/category/computer_peripherals">Computer Peripherals</a></li>
+    </ul>
+{% endblock %}
