@@ -1,0 +1,82 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    height: 100%;
+    margin: 0;
+    width: 100%;
+}
+.header{
+    display: flex;
+    background-color: #a71d2a;
+    width: 100%;
+    height: 60px;
+}
+.header .logo a{
+    text-decoration: none;
+    color: black;
+}
+.sidebar{
+    position: absolute;
+    top: 90px;
+    left: 15px;
+    height: 100%;
+    width: 300px;
+}
+.pagination .btn a{
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+}
+.sidebar a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+}
+.header .logo{
+    margin-left: 30px;
+}
+h3 a{
+    margin: 5px;
+    text-decoration: none;
+    color: #a71d2a;
+}
+.active a{
+    color: #3a3939;
+    font-weight: bold;
+}
+.example-wrapper{
+    min-height: 100%;
+}
+.searching{
+    margin-left: 450px;
+}
+.search input{
+    width: 350px;
+    height: 30px;
+    border-radius: revert;
+}
+.searching form{
+    display: flex;
+}
+.products_item{
+    max-width: 800px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin: 30px;
+}
+.content{
+    min-height: 120vh;
+}
+.footer{
+    background-color: #636d73;
+    width: 100%;
+    height: 5vh;
+    text-align: center;
+    clear: both;
+    position: relative;
+    margin-top: -200px;
+}
