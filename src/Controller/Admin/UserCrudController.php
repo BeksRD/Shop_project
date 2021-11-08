@@ -23,24 +23,24 @@ class UserCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            IdField::new('id')
-                ->onlyOnIndex(),
-            TextField::new('username'),
-            EmailField::new('email'),
-            TextField::new('password')
-                ->hideOnDetail()
-                ->setFormType(PasswordType::class)
-                ->setFormTypeOptions(['mapped' => false,'attr' => ['autocomplete' => 'new-password'],'constraints' => [
-                    new NotBlank([
-                        'message' => 'Please enter a password',
-                    ]),
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
-                        'max' => 4096,
-                    ]),
-                ],]),
-        ];
+        IdField::new('id')
+            ->onlyOnIndex(),
+        TextField::new('username'),
+        EmailField::new('email'),
+        TextField::new('password')
+            ->hideOnDetail()
+            ->setFormType(PasswordType::class)
+            ->setFormTypeOptions(['mapped' => false,'attr' => ['autocomplete' => 'new-password'],'constraints' => [
+                new NotBlank([
+                    'message' => 'Please enter a password',
+                ]),
+                new Length([
+                    'min' => 6,
+                    'minMessage' => 'Your password should be at least {{ limit }} characters',
+                    // max length allowed by Symfony for security reasons
+                    'max' => 4096,
+                ]),
+            ],]),
+    ];
     }
 }
