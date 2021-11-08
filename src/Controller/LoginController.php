@@ -10,7 +10,10 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class LoginController extends AbstractController
 {
-    #[Route('/login', name: 'login')]
+
+    /**
+     * @Route("/login", name="login")
+     */
     public function index(AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -20,7 +23,11 @@ class LoginController extends AbstractController
             'error' => $error,
         ]);
     }
-    #[Route('/logout', name: 'logout')]
+
+
+    /**
+     * @Route("/logout",name="logout")
+     */
     public function logout(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
         $error = $authenticationUtils->getLastAuthenticationError();

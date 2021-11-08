@@ -26,7 +26,9 @@ class ProductController extends AbstractController
         $this->security = $security;
     }
 
-    #[Route('/create', name: 'product')]
+    /**
+     * @Route("/create",name="product")
+     */
     public function createProduct()
     {
         $faker = Factory::create();
@@ -47,7 +49,9 @@ class ProductController extends AbstractController
 //            'product_id' => $product->getId(),
 //        ]);
     }
-    #[Route('/homepage/{page}', defaults:['page'=>1])]
+    /**
+     * @Route("/homepage/{page}",defaults={"page": 1})
+     */
     public function show($page, Request $request):Response
     {
         $json = file_get_contents('https://www.boredapi.com/api/activity');
@@ -61,7 +65,10 @@ class ProductController extends AbstractController
         $products = $paginate->make(4,$rp,$page);
         return $this->render('product/aboutProducts.html.twig',['products'=>$products[0],'maxPages'=>$products[1],'thisPage'=>$page, 'activity'=>$data]);
     }
-    #[Route('/result/show/{page}')]
+
+    /**
+     * @Route("/result/show/{page}")
+     */
     public function listProduct(Request $request, $page=1):Response
     {
         $em = $this->getDoctrine()
@@ -76,7 +83,10 @@ class ProductController extends AbstractController
             return $this->render('product/NotFind.html.twig');
         }
     }
-    #[Route('/add/product')]
+
+    /**
+     * @Route("/add/product")
+     */
     public function new(EntityManagerInterface $entityManager, Request $request){
         if(!$this->security->isGranted("ROLE_ADMIN")){
             $this->addFlash('danger','You cannot enter');
@@ -112,6 +122,9 @@ class ProductController extends AbstractController
         ]);
     }
     #[Route('/show/{id}')]
+    /**
+     * @Route("/show/{id}")
+     */
     public function showOne(int $id):Response
     {
         $product = $this->getDoctrine()
@@ -126,7 +139,10 @@ class ProductController extends AbstractController
             'descr'=>$product->getDescription()
         ]);
     }
-    #[Route('/update/product/{productId}')]
+
+    /**
+     * @Route("/update/product/{productId}")
+     */
     public function updateProduct(int $productId,Request $request):Response
     {
         $em = $this->getDoctrine()->getManager();
@@ -159,7 +175,10 @@ class ProductController extends AbstractController
             'product_form'=>$form->createView(),
         ]);
     }
-    #[Route('/delete/{id}')]
+
+    /**
+     * @Route("/delete/{id}")
+     */
     public function deleteProduct($id):Response
     {
         $entityManager = $this->getDoctrine()->getManager();
@@ -171,7 +190,9 @@ class ProductController extends AbstractController
         $this->addFlash('success','Product is already deleted');
         return $this->redirectToRoute('app_product_show');
     }
-    #[Route('/category/{categories}')]
+    /**
+     * @Route("/category/{categories}")
+     */
     public function getCategory(string $categories):Response
     {
         $category = $this->getDoctrine()
